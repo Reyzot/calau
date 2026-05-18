@@ -644,7 +644,7 @@ function updateStats(){
   if(sc)sc.textContent=all.length;
   if(scat)scat.textContent=[...new Set(all.map(d=>d.cat))].length;
   const strip=document.getElementById("home-strip");
-  if(strip&&!strip._loaded){strip._loaded=true;const wi=all.filter(d=>d.img);if(wi.length){const row=[...wi,...wi];strip.innerHTML=row.map(d=>`<img src="${d.img}" alt="${d.name}">`).join("");}}
+  if(strip&&!strip._loaded){strip._loaded=true;const wi=all.filter(d=>d.img);if(wi.length>=3){const row=[...wi,...wi];strip.innerHTML=row.map(d=>`<img src="${d.img}" alt="${d.name}">`).join("");}}
 }
 
 function render(){
