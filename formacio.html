@@ -956,7 +956,7 @@ async function syncFromSupabase(attempt){
   const delays=[0,10000,20000,30000,40000];
   setSyncStatus("⏳ Sincronizando...","#aaa");
   try{
-    const res=await fetch(SUPA_URL+"/rest/v1/trainings?select=*&apikey="+SUPA_KEY);
+    const res=await fetch(SUPA_URL+"/rest/v1/trainings?select=*&apikey="+SUPA_KEY,{credentials:"omit"});
     if(!res.ok){throw new Error("HTTP "+res.status);}
     const data=await res.json();
     const localDeleted=new Set(JSON.parse(localStorage.getItem('calau_formacio_deleted')||'[]'));
