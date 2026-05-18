@@ -18,7 +18,8 @@ button{background:#333;color:#fff;padding:12px 20px;border:none;border-radius:8p
 <button onclick="runTest()">▶ Ejecutar Test</button>
 <div id="out"></div>
 <script>
-const URL="https://mbvmvzmjpiofxkukdxyb.supabase.co/rest/v1/recipes?select=id,name";
+const URL_SMALL="https://mbvmvzmjpiofxkukdxyb.supabase.co/rest/v1/recipes?select=id,name";
+const URL_FULL="https://mbvmvzmjpiofxkukdxyb.supabase.co/rest/v1/recipes?select=*";
 const KEY="sb_publishable_avKRxfagFn9yQ8tx0qfQHw_1WnnLxHr";
 
 function log(msg,type){
@@ -48,10 +49,10 @@ async function runTest(){
   log("Navegador: "+navigator.userAgent,"info");
   log("Online: "+navigator.onLine,"info");
 
-  await tryFetch("Sin headers (URL param)",URL+"&apikey="+KEY,{credentials:"omit"});
-  await tryFetch("Con Authorization header",URL,{headers:{"Authorization":"Bearer "+KEY},credentials:"omit"});
-  await tryFetch("Con apikey header",URL,{headers:{"apikey":KEY,"Authorization":"Bearer "+KEY},credentials:"omit"});
-  await tryFetch("Sin credentials:omit",URL+"&apikey="+KEY,{});
+  await tryFetch("Datos pequeños (id,name)",URL_SMALL+"&apikey="+KEY,{credentials:"omit"});
+  await tryFetch("Datos completos (select=*)",URL_FULL+"&apikey="+KEY,{credentials:"omit"});
+  await tryFetch("Completo limit=1",URL_FULL+"&limit=1&offset=0&apikey="+KEY,{credentials:"omit"});
+  await tryFetch("Completo limit=5",URL_FULL+"&limit=5&offset=0&apikey="+KEY,{credentials:"omit"});
 
   log("✔ Tests completados","info");
 }
